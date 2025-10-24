@@ -1,4 +1,5 @@
-import { Column, CreateDateColumn, PrimaryGeneratedColumn } from "typeorm";
+import { Message } from "src/chat/entities/message.entity";
+import { Column, CreateDateColumn, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 export class User {
 
@@ -16,6 +17,9 @@ export class User {
 
     @Column({ nullable: true })
     avatarUrl: string;
+
+    @OneToMany(() => Message, (message) => message.sender)
+    messages: Message[];
 
     @CreateDateColumn()
     createdAt: Date;
